@@ -1,7 +1,7 @@
 from openai import AzureOpenAI
     
 client = AzureOpenAI(
-    api_key="8f0b2d8e5197447ca7dde63d4cb036c6",  
+    api_key="",  
     api_version="2023-12-01-preview",
     azure_endpoint="https://ao-dd-lexer-test.openai.azure.com/"
 )
