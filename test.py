@@ -1,14 +1,16 @@
 from openai import AzureOpenAI
+import pandas as pd
 
-dataset = pd.read_csv('https://raw.githubusercontent.com/Build-Week-Spotify-Song-Suggester-4/datascience/master/spotify_songs.csv')
-    
+df = pd.read_csv('https://github.com/dianabisbe/GlobalBootcampPowerPlatform/blob/main/spotify_songs.csv', on_bad_lines='skip')
+df = df[df['artist'] == 'ABBA'].head(10)
+df = df.drop(columns=['artist, link'])
+
+
 client = AzureOpenAI(
     api_key="",  
     api_version="2023-12-01-preview",
     azure_endpoint="https://ao-dd-lexer-test.openai.azure.com/"
 )
-
-
 
 # Loop through each row in Renamed Columns & concatenate the data into a single string. Pass resulting string to the API
 renamed_columns = dataset
