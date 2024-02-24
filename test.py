@@ -1,16 +1,12 @@
-from openai import AzureOpenAI
+from openai import OpenAIAI
 import pandas as pd
 
-df = pd.read_csv('https://github.com/dianabisbe/GlobalBootcampPowerPlatform/blob/main/spotify_songs.csv', on_bad_lines='skip')
-df = df[df['artist'] == 'ABBA'].head(10)
-df = df.drop(columns=['artist, link'])
+dataset = pd.read_csv('https://github.com/dianabisbe/GlobalBootcampPowerPlatform/blob/main/spotify_songs.csv', on_bad_lines='skip')
+dataset = dataset[dataset['artist'] == 'ABBA'].head(10)
+dataset = dataset.drop(columns=['artist, link'])
 
 
-client = AzureOpenAI(
-    api_key="",  
-    api_version="2023-12-01-preview",
-    azure_endpoint="https://ao-dd-lexer-test.openai.azure.com/"
-)
+client = OpenAI(api_key = api_key)
 
 # Loop through each row in Renamed Columns & concatenate the data into a single string. Pass resulting string to the API
 renamed_columns = dataset
@@ -29,8 +25,8 @@ for index, row in renamed_columns.iterrows():
     ]
     # OpenAI Chat API
     chat = client.chat.completions.create(
-    model="gpt-35-turbo", 
-    messages=messages
+        model="gpt-3.5-turbo",
+        messages=messages
     )
     # Process the response from API
     response = chat.choices[0].message.content
